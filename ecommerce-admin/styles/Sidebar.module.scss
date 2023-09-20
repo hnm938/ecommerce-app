@@ -1,0 +1,100 @@
+@import "mixins";
+
+.Sidebar {
+  width: fit-content;
+  height: 100vh;
+  padding: 7rem 0 2rem 0;
+
+  background: whitesmoke;
+
+  @include flex(column, flex-start, flex-start);
+  gap: 0 0;
+
+  border-right: solid lightgray 1px;
+
+  h1,
+  h2 {
+    width: 100%;
+    padding: 0 3rem;
+    margin: 0 auto;
+
+    font-size: 2.5rem;
+    font-weight: 800;
+  }
+
+  h2 {
+    transform: translateY(-0.5rem);
+    color: rgba(128, 128, 128, 0.75);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  table {
+    thead tr td {
+      width: 50px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      white-space: nowrap;
+
+      &:nth-last-of-type(1) { box-shadow: none; }
+    }
+
+    tr td {
+      border-bottom: solid lightgray 1px;
+      margin-bottom: 1rem;
+      padding: 0.5rem 3rem;
+
+      &:nth-last-of-type(1) {
+        box-shadow: -1px 0 0 0 lightgray;
+        background: whitesmoke;
+        padding: 1rem 0.5rem;
+
+        a {
+          padding: 0.5rem 1rem;
+          border: solid lightgray 1px;
+          border-radius: 0.25rem;
+          
+          cursor: pointer;
+          transition: background-color 150ms ease;;
+
+          &:nth-of-type(1) { margin-right: 0.75rem; }
+          &:hover { background-color: lightgray; }
+        }
+      }
+    }
+  }
+
+  div {
+    width: 100%;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+
+    @include flex(row);
+    gap: 0 0.5rem;
+
+    h2 {
+      width: 100%;
+      padding: 0 1rem 0.5rem 1rem;
+
+      font-weight: 600;
+      font-size: 1rem;
+
+      white-space: nowrap;
+
+      border-bottom: solid lightgray 1px;
+    }
+
+    .product-controls {
+      width: 50%;
+      gap: 0 0.5rem;
+
+      a {
+        padding: 0.25rem 1rem;
+        border: solid lightgray 1px;
+        border-radius: 0.25rem;
+      }
+    }
+  }
+}

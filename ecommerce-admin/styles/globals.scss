@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;0,6..12,1000;1,6..12,200;1,6..12,300;1,6..12,400;1,6..12,500;1,6..12,600;1,6..12,700;1,6..12,800;1,6..12,900;1,6..12,1000&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --border-radius: 0.25rem;
+  
+  --white: white;
+
+  --error: #EF4444;
+  --confirm: #22C55E;
+}
+
+* { font-family: "Nunito Sans", sans-serif; }
+
+img {
+  max-height: 100%;
+}
+
+h1 {
+  color: black;
+  font-size: 1.5rem;
+}
+
+
+label {
+  @apply text-blue-900;
+}
+
+input, textarea, select {
+  @apply border-2 border-gray-300 rounded-md px-1 w-full;
+  @apply mb-2;
+}
+
+input:focus, textarea:focus {
+  @apply border-blue-900;
+}
+
+
+
+.delete-btn {
+  font-weight: 600;
+  &:hover { background-color: rgba(255, 50, 50, 0.1) !important; }
+}
+
+.btn-default, .btn-primary, .btn-confirm, .btn-cancel {
+  @apply text-white px-4 py-1 rounded-md;
+}
+
+.btn-primary { @apply bg-blue-900; }
+.btn-default { @apply bg-gray-400; }
+.btn-confirm { @apply bg-green-500; }
+.btn-cancel { @apply bg-red-500; }
