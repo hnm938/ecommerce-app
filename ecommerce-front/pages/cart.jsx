@@ -25,7 +25,7 @@ const Box = styled.div`
 `;
 
 export default function CartPage() {
-  const { cartProducts, addProduct, removeProduct } = useContext(CartContext);
+  const { cartProducts, clearCart, addProduct, removeProduct } = useContext(CartContext);
   const [products, setProducts] = useState([]);
 
   const [name, setName] = useState("");
@@ -34,6 +34,7 @@ export default function CartPage() {
   const [postalCode, setPostalCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [country, setCountry] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (cartProducts.length > 0) {
@@ -44,6 +45,15 @@ export default function CartPage() {
       setProducts([]);
     }
   }, [cartProducts]);
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    if (window?.location.href.includes("success")) {
+      setIsSuccess(true);
+      clearCart();
+    }
+  }, []);
 
   function increaseItemQuantity(id) {
     addProduct(id);
@@ -73,13 +83,12 @@ export default function CartPage() {
     total += price;
   }
 
-  if (window.location.href.includes("success")) {
+  if (isSuccess) {
     return (
-      <>
-        <h1>Tanks for your order!</h1>
-        <p>We will get it sent out right away.</p>
-      </>
-    )
+      <Layout>
+        <h1>Thank you for your order</h1>
+      </Layout>
+    );
   }
 
   return (
