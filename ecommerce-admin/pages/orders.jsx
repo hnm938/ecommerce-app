@@ -18,30 +18,33 @@ export default function OrdersPage() {
         <thead>
           <tr>
             <td>Date</td>
+            <td>Paid</td>
             <td>Recipient</td>
             <td>Products</td>
             <td> </td>
           </tr>
         </thead>
         <tbody>
-          {orders.length > 0 && orders.map(order => (
-            <tr>
-              <td>{(new Date(order.createdAt)).toLocaleString()}</td>
-              <td>
-                {order.name} {order.email} <br />
-                {order.city} {order.postalCode} {order.country} <br />
-                {order.streetAddress}
-              </td>
-              <td>
-                {order.line_items.map(l => (
-                  <>
-                    {l.price_data.product_data?.name} x {l.quantity}
-                    <br />
-                  </>
-                ))}
-              </td>
-            </tr>
-          ))}
+          {orders.length > 0 &&
+            orders.map((order) => (
+              <tr>
+                <td>{new Date(order.createdAt).toLocaleString()}</td>
+                <td>{order.paid ? "YES" : "NO"}</td>
+                <td>
+                  {order.name} {order.email} <br />
+                  {order.city} {order.postalCode} {order.country} <br />
+                  {order.streetAddress}
+                </td>
+                <td>
+                  {order.line_items.map((l) => (
+                    <>
+                      {l.price_data.product_data?.name} x {l.quantity}
+                      <br />
+                    </>
+                  ))}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </Layout>
