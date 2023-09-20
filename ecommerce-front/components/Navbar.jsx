@@ -1,11 +1,14 @@
 import Link from "next/link";
+import { useContext } from "react";
 import styled from "styled-components";
+import { CartContext } from "./CartContext";
 
 const StyledHeader = styled.header`
   background-color: whitesmoke;
 `;
 
 export default function Navbar() {
+  const {cartProducts} = useContext(CartContext);
   return (
     <StyledHeader>
       <Link href={"/"}>Ecommerce</Link>
@@ -14,7 +17,7 @@ export default function Navbar() {
         <Link href={"/products"}>All Products</Link>
         <Link href={"/categories"}>Categories</Link>
         <Link href={"/account"}>Account</Link>
-        <Link href={"/cart"}>Cart (0)</Link>
+        <Link href={"/cart"}>Cart ({cartProducts.length})</Link>
       </nav>
     </StyledHeader>
   )

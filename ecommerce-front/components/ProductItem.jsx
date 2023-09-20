@@ -1,18 +1,9 @@
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
+import { useRouter } from "next/router";
 import styled from "styled-components";
-import css from "styled-jsx/css";
 
-const Button = styled.button`
-  padding: 0.25rem 0.5rem;
-  border: solid lightgray 1px;
-  border-radius: 0.25rem;
-
-  ${props => props.confirm && css`
-    border-radius: 0.25rem;
-    font-weight: 600;
-    color: var(--confirm);
-    border-color: var(--confirm);
-  `}
-`;
+import { Button } from "./Button.jsx";
 
 const ProductWrapper = styled.div`
   display: flex;
@@ -54,16 +45,20 @@ export default function ProductItem({
   price,
   images,
 }) {
+  const { addProduct } = useContext(CartContext);
+  const router = useRouter();
+  const url = "/product/"+_id;
+
   return (
     <ProductWrapper>
-      <ItemBox>
+      <ItemBox onClick={() => router.push(url)}>
         <div>
           <img src={images[0]} alt="" />
         </div>
       </ItemBox>
       <h1 className="mt-[0.75rem] mb-[0.25rem]">{title}</h1>
       <div className="w-[95%] flex justify-between items-center">
-        <Button confirm>Add to Cart</Button>
+        <Button confirm onClick={() => addProduct(_id)}>Add to Cart</Button>
         <b className="text-xl text-gray-600">${price}</b>
       </div>
     </ProductWrapper>
