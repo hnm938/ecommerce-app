@@ -1,4 +1,4 @@
-import Featured from "@/components/Featured"
+import Header from "@/components/Header"
 import Layout from "@/components/Layout";
 import NewProducts from "@/components/NewProducts";
 
@@ -8,7 +8,7 @@ import { mongooseConnect } from "@/lib/mongoose";
 export default function HomePage({ featuredProduct, newProducts }) {
   return (
     <Layout>
-      <Featured />
+      <Header title="Featured Products" subtitle="Some of the products we love" />
       <NewProducts products={newProducts} />
     </Layout>
   );
