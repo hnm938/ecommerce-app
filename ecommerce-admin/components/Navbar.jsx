@@ -1,5 +1,7 @@
 import Link from "next/link";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
+
+import { signOut } from "next-auth/react";
 
 export default function Navbar() {
   const inactiveLink = "flex gap-1 p-1 pr-4";
@@ -7,6 +9,11 @@ export default function Navbar() {
 
   const router = useRouter();
   const {pathname} = router;
+
+  async function logout() {
+    await router.push("/");
+    await signOut();
+  }
 
   return (
     <aside className="text-white p-4 pr-0">
@@ -55,6 +62,9 @@ export default function Navbar() {
             Settings
           </span>
         </Link>
+        <button onClick={logout} className="btn-cancel inactive mr-4">
+          Logout
+        </button>
       </nav>
     </aside>
   );
