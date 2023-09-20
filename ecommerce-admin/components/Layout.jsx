@@ -1,8 +1,11 @@
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 import Navbar from "@/components/Navbar";
 
-export default function Layout({children}) {
+import styles from "@/styles/Layout.module.scss";
+import Sidebar from "./Sidebar";
+
+export default function Layout({children, sidebar, sidebarTitle, sidebarSubtitle }) {
   const { data: session } = useSession();
   if (!session) {
     return (
@@ -22,9 +25,10 @@ export default function Layout({children}) {
   return (
     <div className="bg-blue-900 min-h-screen flex">
       <Navbar />
-      <div className="bg-white flex-grow mt-2 mr-2 mb-2 rounded-lg p-4">
-        {children}
-      </div>
+      {sidebar && (
+        <Sidebar title={sidebarTitle} subtitle={sidebarSubtitle} table={sidebar} />
+      )}
+      <div className={styles["page-container"]}>{children}</div>
     </div>
   );
 }

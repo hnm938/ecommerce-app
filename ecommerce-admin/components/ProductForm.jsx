@@ -48,12 +48,13 @@ export default function ProductForm({
       await axios.post("/api/products", data);
     }
 
-    setGoToProducts(true);
+    window.location.reload();
   }
 
   if (goToProducts) {
     router.push("/products");
   }
+  
   function goBack(e) {
     e.preventDefault();
     router.push("/products");
@@ -90,7 +91,7 @@ export default function ProductForm({
   const propertiesToFill = [];
   if (categories.length > 0 && category) {
     let catInfo = categories.find(({ _id }) => _id === category);
-    propertiesToFill.push(...catInfo.properties);
+    propertiesToFill.push(...catInfo?.properties);
     while (catInfo?.parent?._id) {
       const parentCat = categories.find(
         ({ _id }) => _id === catInfo?.parent?._id
@@ -111,7 +112,10 @@ export default function ProductForm({
       />
 
       <label>Category</label>
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <select value={category} onChange={(e) => {
+        setCategory(e.target.value);
+        console.log(category);
+      }}>
         <option value="">Uncategorized</option>
         {categories.length > 0 &&
           categories.map((c) => <option value={c._id}>{c.name}</option>)}

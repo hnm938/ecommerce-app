@@ -1,0 +1,4 @@
+Settings page to add new admins
+ - Authentication done by isAdmin in the database
+
+Custom Styling

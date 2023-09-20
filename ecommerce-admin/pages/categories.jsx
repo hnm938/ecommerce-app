@@ -134,19 +134,20 @@ function Categories({ swal }) {
           <td>{category._id}</td>
           <td>{category.name}</td>
           <td>{category?.parent?.name}</td>
-          <td style={{ display: "flex", gap: "0.5rem" }}>
-            <button
-              className="btn-primary"
+          <td>
+            <a
               onClick={() => editCategory(category)}
+              style={{ backgroundColor: "" }}
             >
               Edit
-            </button>
-            <button
-              className="btn-primary"
+            </a>
+            <a
               onClick={() => deleteCategory(category)}
+              className="delete-btn"
+              style={{ color: "var(--error)", borderColor: "var(--error)" }}
             >
               Delete
-            </button>
+            </a>
           </td>
         </tr>
         {sortedChildCategories.map((childCategory) =>
@@ -157,7 +158,16 @@ function Categories({ swal }) {
   };
 
   return (
-    <Layout>
+    <Layout
+      sidebarTitle="Categories"
+      sidebarSubtitle="Edit & Manage Categories"
+      sidebar={
+        <CategoryTable
+          categories={categories}
+          renderCategories={renderCategories}
+        />
+      }
+    >
       <h1>Categories</h1>
       <label>
         {editedCategory
@@ -185,7 +195,7 @@ function Categories({ swal }) {
             ))}
           </select>
         </div>
-        <div className="mb-4">
+        <div>
           <label className="block">Properties</label>
           <button
             type="button"
@@ -196,7 +206,7 @@ function Categories({ swal }) {
           </button>
           {properties.length > 0 &&
             properties.map((property, index) => (
-              <div className="flex gap-1 mb-2">
+              <div>
                 <input
                   type="text"
                   className="mb-0"
@@ -225,7 +235,7 @@ function Categories({ swal }) {
               </div>
             ))}
         </div>
-        <div className="flex gap-1">
+        <div>
           {editedCategory && (
             <button
               type="button"
@@ -245,25 +255,28 @@ function Categories({ swal }) {
           </button>
         </div>
       </form>
-      {!editedCategory && (
-        <table className="basic mt-4">
-          <thead>
-            <tr>
-              <td>Id</td>
-              <td>Category Name</td>
-              <td>Parent category</td>
-              <td></td>
-            </tr>
-          </thead>
-          <tbody>
-            {categories
-              .filter((category) => !category.parent)
-              .map((category) => renderCategories(category, 0))}
-          </tbody>
-        </table>
-      )}
     </Layout>
   );
 }
+
+export const CategoryTable = ({ categories, renderCategories }) => {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <td>Id</td>
+          <td>Category Name</td>
+          <td>Parent</td>
+          <td> </td>
+        </tr>
+      </thead>
+      <tbody>
+        {categories
+          .filter((category) => !category.parent)
+          .map((category) => renderCategories(category, 0))}
+      </tbody>
+    </table>
+  );
+};
 
 export default withSwal(({ swal }, ref) => <Categories swal={swal} />);
