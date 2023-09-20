@@ -52,10 +52,34 @@ export default function CartPage() {
     removeProduct(id);
   }
 
+  async function goToPayment() {
+    const response = await axios.post("/api/checkout", {
+      name,
+      email,
+      city,
+      postalCode,
+      streetAddress,
+      country,
+      cartProducts,
+    });
+    if (response.data.url) {
+      window.location = response.data.url;
+    }
+  }
+
   let total = 0;
   for (const productId of cartProducts) {
     const price = products.find((p) => p._id === productId)?.price || 0;
     total += price;
+  }
+
+  if (window.location.href.includes("success")) {
+    return (
+      <>
+        <h1>Tanks for your order!</h1>
+        <p>We will get it sent out right away.</p>
+      </>
+    )
   }
 
   return (
@@ -108,56 +132,54 @@ export default function CartPage() {
 
         {!!cartProducts?.length && (
           <Box>
-            <h2>Order Information</h2>
-            <form method="post" action="/api/checkout">
+            <h2>Order information</h2>
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              name="name"
+              onChange={(ev) => setName(ev.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              name="email"
+              onChange={(ev) => setEmail(ev.target.value)}
+            />
+            <div className="flex flex-row gap-4">
               <input
                 type="text"
-                placeholder="Name"
-                value={name}
-                name="name"
-                onChange={(e) => setName(e.target.value)}
+                placeholder="City"
+                value={city}
+                name="city"
+                onChange={(ev) => setCity(ev.target.value)}
               />
               <input
                 type="text"
-                placeholder="Email"
-                value={email}
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Postal Code"
+                value={postalCode}
+                name="postalCode"
+                onChange={(ev) => setPostalCode(ev.target.value)}
               />
-              <div className="flex flex-row gap-4 ">
-                <input
-                  type="text"
-                  placeholder="City"
-                  value={city}
-                  name="city"
-                  onChange={(e) => City(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Postal Code"
-                  value={postalCode}
-                  name="postalCode"
-                  onChange={(e) => setPostalCode(e.target.value)}
-                />
-              </div>
-              <input
-                type="text"
-                placeholder="Street Address"
-                value={streetAddress}
-                name="streetAddress"
-                onChange={(e) => setStreetAddress(e.target.value)}
-              />{" "}
-              <input
-                type="text"
-                placeholder="Country"
-                value={country}
-                name="country"
-                onChange={(e) => setCountry(e.target.value)}
-              />
-              <Button confirm type="submit">
-                Continue to Checkout
-              </Button>
-            </form>
+            </div>
+            <input
+              type="text"
+              placeholder="Street Address"
+              value={streetAddress}
+              name="streetAddress"
+              onChange={(ev) => setStreetAddress(ev.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Country"
+              value={country}
+              name="country"
+              onChange={(ev) => setCountry(ev.target.value)}
+            />
+            <Button black block onClick={goToPayment}>
+              Continue to payment
+            </Button>
           </Box>
         )}
       </ColumnsWrapper>
