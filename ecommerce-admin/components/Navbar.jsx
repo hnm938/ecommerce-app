@@ -30,6 +30,15 @@ export default function Navbar() {
             Products
           </span>
         </Link>
+        <Link href={"/categories"}>
+          <span
+            className={
+              pathname.includes("/categories") ? activeLink : inactiveLink
+            }
+          >
+            Categories
+          </span>
+        </Link>
         <Link href={"/orders"}>
           <span
             className={pathname.includes("/orders") ? activeLink : inactiveLink}
