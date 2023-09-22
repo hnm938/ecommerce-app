@@ -5,11 +5,26 @@ import NewProducts from "@/components/NewProducts";
 import { Product } from "@/models/Product";
 import { mongooseConnect } from "@/lib/mongoose";
 
+import { Hero, Splitter } from "@/components/StyledComponents";
+
+import styles from "@/styles/Home.module.scss";
+
 export default function HomePage({ featuredProduct, newProducts }) {
   return (
     <Layout>
-      <Header title="Featured Products" subtitle="Some of the products we love" />
-      <NewProducts products={newProducts} />
+      <div className={styles["Home"]}>
+        <header>
+          <Hero $height="25vw" $maxHeight="20rem" $backgroundImage="../images/hero_background_1.jpg">
+            <h1>STORE NAME</h1>
+            <Splitter/>
+          </Hero>
+        </header>
+        <Header
+          title="Featured Products"
+          subtitle="Some of the products we love"
+        />
+        <NewProducts products={newProducts} />
+      </div>
     </Layout>
   );
 }

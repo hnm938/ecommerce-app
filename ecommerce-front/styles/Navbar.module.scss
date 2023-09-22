@@ -1,0 +1,99 @@
+@import "mixins";
+
+$item-gap-x: 2rem;
+$item-gap-y: 1rem;
+
+.Navbar {
+  width: 100%;
+  height: 4rem;
+  padding: 1rem 0;
+
+  position: fixed;
+  top: 0; left: 0;
+
+  @include flex(row);
+  gap: 0 $item-gap-x;
+
+  background-color: var(--navbar-background);
+  border-bottom: solid rgba(0, 0, 0, 0.1) 1px;
+
+  color: gray;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Titillium Web" !important;
+
+  z-index: 9999;
+
+  #navbar--store-title {
+    position: absolute;
+    top: 50%; left: 1rem;
+    transform: translate(0, -50%) scaleY(0.9);
+    white-space: nowrap;
+
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: "Montserrat";
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  #collapse-button {
+    display: none;
+    position: absolute;
+    right: 1rem;
+  }
+  
+  nav {
+    @include flex(row);
+    gap: 0 $item-gap-x;
+    
+    a:hover { color: rgb(35, 35, 35); }
+  }
+
+  @media only screen and (max-width: 880px) {
+    &.open {
+      height: fit-content !important;
+    }
+
+    #navbar--store-title {
+      display: block;
+      top: 0; left: 50%;
+      transform: translate(-50%, 0.65rem) scaleY(0.9);
+
+      font-size: 1.5rem;
+    }
+    
+    #collapse-button { display: block; }
+
+    height: 3.5rem;
+    font-size: 0.9rem;
+    
+    @include flex(column, center, flex-start);
+    gap: $item-gap-y 0;
+
+    overflow: hidden;
+    
+    nav {
+      width: 100%;
+      
+      @include flex(column, center, flex-start);
+      gap: 0;
+
+      a {
+        width: 100%;
+        padding: $item-gap-y 0;
+
+        text-align: center;
+        border-bottom: solid rgba(0, 0, 0, 0.1) 1px;
+
+        background-color: rgba(0, 0, 0, 0.015);
+
+        &:nth-of-type(1) {
+          margin-top: 2.5rem;
+          border-top: solid rgba(0, 0, 0, 0.1) 1px;
+        }
+        &:hover { background-color: rgba(0, 0, 0, 0.045); }
+      }
+    }
+  }
+}

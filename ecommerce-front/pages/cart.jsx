@@ -1,4 +1,4 @@
-import { Button } from "@/components/Button";
+import { Button } from "@/components/StyledComponents";
 import { CartContext } from "@/components/CartContext";
 import Layout from "@/components/Layout";
 import { useContext, useState, useEffect } from "react";

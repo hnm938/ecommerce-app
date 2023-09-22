@@ -1,9 +1,9 @@
 @import "mixins";
 
 .Header {
-  width: 80cqw;
+  width: 85vw;
   height: fit-content;
-  margin: 2rem auto;
+  margin: 4cqw auto 2cqw auto;
 
   @include flex(column);
 
@@ -13,39 +13,51 @@
   .header--hero {
     width: 100%;
     height: 100%;
-    padding: 4rem 3rem;
+    padding: 2vw 3rem;
 
     @include flex(column);
 
     color: var(--header--hero-title);
     font-size: 2rem;
-    line-height: 2.25rem;
+    line-height: 2.75cqw;
 
     background-image: url("../public/images/header_background.jpg");
     background-size: cover;
     background-position: center;
-    border-radius: inherit;
+    border-radius: 1cqw;
 
     h1, h2 {
-      padding: 0;
-      height: fit-content;
+      padding: 0 0.75vw;
+
       white-space: nowrap;
-      padding: 0 0.5cqw;
-      border-radius: 1rem;
       background-color: white;
     }
 
     .header--hero-title {
-      font-size: 2.5cqw;
+      font-size: 3cqw;
       font-weight: 700;
-      line-height: 2.5cqw;
+      z-index: 2;
     }
 
     .header--hero-subtitle {
       color: var(--header--hero-subtitle);
-      font-size: 1.25cqw;
+      font-size: 1.5cqw;
       font-weight: 500;
-      line-height: 1.75cqw;
+      z-index: 1;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .header--hero { padding: 3.5vw 3rem; } 
+  }
+  
+  @media only screen and (max-width: 600px) {
+    width: 90vw;
+    
+    .header--hero {
+      padding: 6vw 3rem;
+      .header--hero-title { font-size: 4.5cqw; }
+      .header--hero-subtitle { display: none; }
     }
   }
 }

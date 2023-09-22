@@ -4,11 +4,31 @@ import { Product } from "@/models/Product";
 import Layout from "@/components/Layout";
 import ProductsGrid from "@/components/ProductsGrid";
 
+import { Hero, Splitter } from "@/components/StyledComponents";
+import Header from "@/components/Header";
+
+import styles from "@/styles/Products.module.scss";
+
 export default function ProductsPage({ products }) {
   return (
     <Layout>
-      <h1>All Products</h1>
-      <ProductsGrid products={products} />
+      <div className={styles["Products"]}>
+        <Header
+          title="All Products"
+          subtitle="Browse all Products"
+        />
+        <header>
+          <Hero
+            $height="25vw"
+            $maxHeight="20rem"
+            $backgroundImage="../images/hero_background_1.jpg"
+          >
+            <h1>STORE NAME</h1>
+            <Splitter />
+          </Hero>
+        </header>
+        <ProductsGrid products={products} />
+      </div>
     </Layout>
   );
 }
