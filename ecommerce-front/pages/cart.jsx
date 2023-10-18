@@ -1,28 +1,10 @@
-import { Button } from "@/components/Button";
+import { Button } from "@/components/StyledComponents";
 import { CartContext } from "@/components/CartContext";
 import Layout from "@/components/Layout";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 
-import styled from "styled-components";
-
-const ColumnsWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1.3fr 1.7fr;
-  gap: 40px;
-  margin-top: 40px;
-  padding: 0 40px;
-`;
-
-const Box = styled.div`
-  background-color: whitesmoke;
-  border-radius: 0.5rem;
-  padding: 30px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem 0;
-`;
+import styles from "@/styles/Cart.module.scss";
 
 export default function CartPage() {
   const { cartProducts, clearCart, addProduct, removeProduct } = useContext(CartContext);
@@ -93,55 +75,90 @@ export default function CartPage() {
 
   return (
     <Layout>
-      <ColumnsWrapper>
-        <Box>
+      <div className={styles["cart"]}>
+        <div
+          className={`${styles["section-container"]} ${styles["cart-container"]}`}
+        >
           {!cartProducts?.length && <div>Your cart is empty</div>}
-          <h2>Cart</h2>
+          <h1>Cart</h1>
 
           {products?.length > 0 && (
             <table>
-              <thead>
-                <tr>
-                  <td>Product</td>
-                  <td>Quantity</td>
-                  <td>Price</td>
-                </tr>
-              </thead>
               <tbody>
                 {products.map((product) => (
                   <tr>
-                    <td>{product.title}</td>
-                    <td className="flex items-center gap-2">
-                      <Button onClick={() => decreaseItemQuantity(product._id)}>
-                        -
-                      </Button>
-                      {cartProducts.filter((id) => id === product._id).length}
-                      <Button onClick={() => increaseItemQuantity(product._id)}>
-                        +
-                      </Button>
+                    <td className={styles["cart-product--image"]}>
+                      <h1> </h1>
+                      <img src={product.images[0]} alt="" />
+                    </td>
+                    <td className={styles["cart-product--props"]}>
+                      <h1>Product</h1>
+                      <h2>{product.title}</h2>
+                      {product.properties && (
+                        <div>
+                          {Object.entries(product.properties).map(
+                            ([key, value]) => (
+                              <div key={key}>
+                                <h3>
+                                  {key}: 
+                                  <span>{value}</span>
+                                </h3>
+                              </div>
+                            )
+                          )}
+                        </div>
+                      )}
                     </td>
                     <td>
-                      $
-                      {cartProducts.filter((id) => id === product._id).length *
-                        product.price}
+                      <h1>Quantity</h1>
+                      <div className={styles["cart-product--quantity"]}>
+                        <button
+                          onClick={() => decreaseItemQuantity(product._id)}
+                        >
+                          -
+                        </button>
+                        <span>
+                          {
+                            cartProducts.filter((id) => id === product._id)
+                              .length
+                          }
+                        </span>
+                        <button
+                          onClick={() => increaseItemQuantity(product._id)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </td>
+                    <td className={styles["cart-product--price"]}>
+                      <h1>Price</h1>
+                      <h2>
+                        $
+                        {cartProducts.filter((id) => id === product._id)
+                          .length * product.price}
+                        <span> (CAD)</span>
+                      </h2>
                     </td>
                   </tr>
                 ))}
                 <tr>
                   <td></td>
                   <td></td>
+                  <td></td>
                   <td>
-                    <b>${total}</b>
+                    Total: <b>${total}</b>
                   </td>
                 </tr>
               </tbody>
             </table>
           )}
-        </Box>
+        </div>
 
         {!!cartProducts?.length && (
-          <Box>
-            <h2>Order information</h2>
+          <div
+            className={`${styles["section-container"]} ${styles["checkout-container"]}`}
+          >
+            <h1>Order information</h1>
             <input
               type="text"
               placeholder="Name"
@@ -189,9 +206,9 @@ export default function CartPage() {
             <Button black block onClick={goToPayment}>
               Continue to payment
             </Button>
-          </Box>
+          </div>
         )}
-      </ColumnsWrapper>
+      </div>
     </Layout>
   );
 }

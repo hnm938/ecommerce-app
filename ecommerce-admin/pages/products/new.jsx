@@ -8,9 +8,11 @@ export default function NewProduct() {
       sidebarTitle="Products"
       sidebarSubtitle="Edit & Manage Products"
       sidebar={<ProductTable />}
+      padding="2cqw 3cqw"
     >
-      <h1>New Product</h1>
-      <ProductForm />
+      <div className="w-full h-full flex justify-center items-start">
+        <ProductForm containerTitle="Create Product" />
+      </div>
     </Layout>
   );
 }

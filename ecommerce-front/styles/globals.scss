@@ -5,7 +5,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./mixins";
+
 :root {
+  // Universal
+  --white-1: white;
+  --white-2: #FCFCFC;
+  --white-3: #F7F7F7;
+  
+  --black-1: #1a1a1d;
+
+  --coral-1: #F8635E;
+  --coral-2: #FA9793;
+  --coral-3: #FBB9B7;
+  --coral-4: #FBD0CE;
+  
+  --black: rbg(35, 35, 35);
+
+  // Navbar
+  --navbar-background: white;
+
   // Header
   --header--hero-title: rgb(35, 35, 35);
   --header--hero-subtitle: rgb(65, 65, 65);
@@ -14,10 +33,15 @@
   --confirm: #22C55E;
 }
 
-
-* { font-family: "Montserrat", "Titillium Web", sans-serif; }
-
 body {
   margin: 0;
-  padding: 0;
+  color: var(--black-1);
+  font-family: "Montserrat", "Titillium Web", sans-serif;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  border: none;
+  background-color: rgb(0, 0, 0, 0.1);
 }

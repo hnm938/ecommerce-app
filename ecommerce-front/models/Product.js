@@ -5,8 +5,9 @@ const ProductSchema = new Schema(
     title: { type: String },
     description: String,
     price: { type: Number },
+    rating: { type: Number },
     images: [{ type: String }],
-    category: { type: mongoose.Types.ObjectId, ref: "Category" },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
     properties: { type: Object },
   },
   {
@@ -14,4 +15,4 @@ const ProductSchema = new Schema(
   }
 );
 
-export const Product = models.Product || model("Product", ProductSchema);
+export const Product = models?.Product || model("Product", ProductSchema);

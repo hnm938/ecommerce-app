@@ -2,7 +2,7 @@
 
 .Navbar {
   width: 100vw;
-  height: fit-content;
+  height: 55px;
   padding: 1rem 1.5rem;
 
   position: absolute;
@@ -10,8 +10,10 @@
   background-color: whitesmoke;
   border-bottom: solid lightgray 1px;
 
-  @include flex(row, flex-start, center);
+  @include flex(row, center, flex-start);
   gap: 0 0.5rem;
+
+  z-index: 999;
 
   h1 {
     color: black;
