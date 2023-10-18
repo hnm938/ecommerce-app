@@ -1,5 +1,3 @@
-import ProductItem from "./ProductItem";
-
 import styled from "styled-components";
 
 const ProductsGrid = styled.div`
@@ -28,10 +26,6 @@ const ProductsGrid = styled.div`
 
 export default function NewProducts({ products  }) {
   return (
-    <ProductsGrid>
-      {products.length > 0 && products.map(product => (
-        <ProductItem {...product} />
-      ))}
-    </ProductsGrid>
+    <div></div>
   )
 }

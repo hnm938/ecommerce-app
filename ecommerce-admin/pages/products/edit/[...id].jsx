@@ -22,9 +22,17 @@ export default function EditProductPage() {
       sidebarTitle="Products"
       sidebarSubtitle="Edit & Manage Products"
       sidebar={<ProductTable />}
+      padding="2cqw 3cqw"
     >
-      <h1>Edit Product</h1>
-      {productInfo && <ProductForm {...productInfo} />}
+      <div className="w-full h-full flex justify-center items-start">
+        {productInfo && (
+          <ProductForm
+            {...productInfo}
+            containerTitle="Edit Product"
+            key={productInfo._id}
+          />
+        )}
+      </div>
     </Layout>
   );
 }

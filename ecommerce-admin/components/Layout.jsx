@@ -1,11 +1,12 @@
 import { useSession, signIn } from "next-auth/react";
 
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import Navbar from "@/components/Navbar";
 
 import styles from "@/styles/Layout.module.scss";
 import Sidebar from "./Sidebar";
 
-export default function Layout({children, sidebar, sidebarTitle, sidebarSubtitle }) {
+export default function Layout({children, sidebar, sidebarTitle, sidebarSubtitle, padding }) {
   const { data: session } = useSession();
   if (!session) {
     return (
@@ -23,12 +24,40 @@ export default function Layout({children, sidebar, sidebarTitle, sidebarSubtitle
   }
 
   return (
-    <div className="bg-blue-900 min-h-screen flex">
+    <div className="w-full bg-blue-900 min-h-screen flex">
       <Navbar />
-      {sidebar && (
-        <Sidebar title={sidebarTitle} subtitle={sidebarSubtitle} table={sidebar} />
-      )}
-      <div className={styles["page-container"]}>{children}</div>
+      <PanelGroup autoSaveId="example" direction="horizontal">
+        {sidebar && (
+          <>
+            <Panel
+              className={styles["Panel"]}
+              defaultSize={30}
+              minSize={25}
+              order={1}
+            >
+              <Sidebar
+                title={sidebarTitle}
+                subtitle={sidebarSubtitle}
+                table={sidebar}
+              />
+            </Panel>
+            <PanelResizeHandle className={styles["ResizeHandle"]}>
+              <div></div>
+              <div></div>
+              <div></div>
+            </PanelResizeHandle>
+          </>
+        )}
+        <Panel
+          className={styles["Panel"]}
+          collapsible={true}
+          defaultSize={70}
+          minSize={25}
+          order={2}
+        >
+          <div className={styles["page-container"]} style={{ padding: padding !== undefined ? padding :  "0 5cqw" }}>{children}</div>
+        </Panel>
+      </PanelGroup>
     </div>
   );
 }

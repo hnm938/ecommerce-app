@@ -1,4 +1,20 @@
 Settings page to add new admins
- - Authentication done by isAdmin in the database
+ - Admin Authentication
+
+Item star rating
+
+Change image on product hover
+
+Delete all categories/products from the database.
+
+TODO
+Delete product images from database & image bucket when a product is delete
+Add the option to delete a single image, removing from the database & image bucket
+Single item page needs a related items carosuel
 
 Custom Styling
+
+ERRORS
+- Warning: Invalid DOM property `stroke-linejoin`. Did you mean `strokeLinejoin`?
+
+- No 404 for when a category url is invalid i.e. (/category/caoisjhdoi) is invalid go to a 404 page.
